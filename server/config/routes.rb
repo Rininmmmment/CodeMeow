@@ -5,31 +5,18 @@ Rails.application.routes.draw do
   # - PATCH/PUT /users/:id：特定のユーザーを更新
   # - DELETE /users/:id：特定のユーザーを削除
 
-  # user
+  # Users
   resources :users, controller: 'user', only: [:index, :show, :create, :update, :destroy]
 
   # Chapters
-  post 'chapter/create' => 'chapters#create'
-  get 'chapter/read' => 'chapters#read'
-  # patch 'chapter/update' => 'chapters#update'
-  # delete 'chapter/delete' => 'chapters#delete'
+  resources :chapters, controller: 'chapter', only: [:index, :show, :create, :update, :destroy]
 
   # Sections
-  post 'section/create' => 'sections#create'
-  get 'section/read' => 'sections#read'
-  # patch 'section/update' => 'sections#update'
-  # delete 'section/delete' => 'sections#delete'
+  resources :sections, controller: 'section', only: [:index, :show, :create, :update, :destroy]
 
   # Results
-  post 'result/create' => 'results#create'
-  get 'result/read' => 'results#read'
-  # patch 'result/update' => 'results#update'
-  # delete 'result/delete' => 'results#delete'
+  resources :results, controller: 'result', only: [:index, :show, :create, :update, :destroy]
 
   # Quizzes
-  post 'quiz/create' => 'quizzes#create'
-  get 'quiz/read' => 'quizzes#read'
-  # patch 'quiz/update' => 'quizzes#update'
-  # delete 'quiz/delete' => 'quizzes#delete'
-
+  resources :quizze, controller: 'quiz', only: [:index, :show, :create, :update, :destroy]
 end

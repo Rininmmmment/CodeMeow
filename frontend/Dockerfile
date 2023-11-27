@@ -8,4 +8,5 @@ RUN yarn install --no-lockfile
 
 COPY . .
 
-CMD ["yarn", "start"]
+# CMD ["yarn", "dev"]
+CMD ["npm", "start"]
