@@ -5,6 +5,7 @@ WORKDIR /usr/src/app
 COPY ./package.json ./package-lock.json
 
 RUN yarn install --no-lockfile
+RUN npm install react-router-dom
 
 COPY . .
 
