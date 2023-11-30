@@ -1,0 +1,68 @@
+@import './common.scss';
+
+.menu-container{
+  @include default-background;
+  height: 100vh;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+
+  .centering-container{
+    display: inline-block;
+  }
+
+  .make-play-container{
+    display: flex;
+
+    .make{
+      background: $pink;
+      &:hover{
+        background: brighten($pink, 15%);
+        cursor: pointer;
+        transform: translateY(-5px);
+      }
+    }
+
+    .play{
+      background: $blue;
+      &:hover{
+        background: brighten($blue, 15%);
+        cursor: pointer;
+        transform: translateY(-5px);
+      }
+    }
+  }
+
+  .menu-btn {
+    font-family: "Koulen";
+    font-size: 40px;
+    font-weight: 600;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 300px;
+    height: 300px;
+    text-align: center;
+    background: #fff;
+    color: #000;
+    text-decoration: none;
+    border-radius: 21px;
+    border: #000 solid 6px;
+    margin: 5px;
+    transition: 0.5s;
+  }
+
+  .settings{
+    width: 622px;
+    height: 100px;
+    background: $gray;
+    &:hover{
+      background: brighten($gray, 15%);
+      cursor: pointer;
+      transform: translateY(-5px);
+    }
+  }
+}

@@ -1,0 +1,15 @@
+$dark-blue: #292648;
+$pink: #E474BA;
+$blue: #5174E6;
+$gray: #A59DB7;
+
+@function brighten($color, $percent) {
+  $hslColor: hsl(hue($color), saturation($color), lightness($color));
+  $brightenedColor: lighten($hslColor, $percent);
+  @return $brightenedColor;
+}
+
+@mixin default-background{
+  background-image: url('../img/utyu4.png');
+  background-position: top right;
+}

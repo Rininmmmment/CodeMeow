@@ -2,13 +2,10 @@ $dark-blue: #292648;
 $pink: #E474BA;
 $blue: #5174E6;
 @function brighten($color, $percent) {
-    // 色をHSL形式に変換
     $hslColor: hsl(hue($color), saturation($color), lightness($color));
-    // 明度を変更
     $brightenedColor: lighten($hslColor, $percent);
-    // 新しい色を返す
     @return $brightenedColor;
-  }
+}
 
 .login-form{
     width: 40%;
