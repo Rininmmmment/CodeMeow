@@ -12,7 +12,7 @@ import Result from './pages/Result';
 const PrivateRoute = ({ children }) => {
   const { isLoggedIn } = useAuth();
 
-  return isLoggedIn ? children : <Navigate to="/" />;
+  return isLoggedIn ? children : <Navigate to="/login" />;
 };
 
 const App = () => {
@@ -25,6 +25,14 @@ const App = () => {
             element={
               <PrivateRoute>
                 <Menu />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/make-quizzes/upload"
+            element={
+              <PrivateRoute>
+                <Make />
               </PrivateRoute>
             }
           />
