@@ -1,5 +1,6 @@
 import React from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import { AuthProvider, useAuth } from './components/AuthContext';
 import Login from './pages/Login';
 import Menu from './pages/Menu';
 import Make from './pages/Make';
@@ -8,22 +9,32 @@ import Chapter from './pages/Chapter';
 import Section from './pages/Section';
 import Result from './pages/Result';
 
-function App() {
+const PrivateRoute = ({ children }) => {
+  const { isLoggedIn } = useAuth();
+
+  return isLoggedIn ? children : <Navigate to="/" />;
+};
+
+const App = () => {
   return (
-    <BrowserRouter>
-      <div>
+    <AuthProvider>
+      <Router>
         <Routes>
+          <Route
+            path="/menu"
+            element={
+              <PrivateRoute>
+                <Menu />
+              </PrivateRoute>
+            }
+          />
           <Route path="/login" element={<Login />} />
-          <Route path="/menu" element={<Menu />} />
-          <Route path="/make" element={<Make />} />
-          <Route path="/play/select" element={<Select />} />
-          <Route path="/play/chapter" element={<Chapter />} />
-          <Route path="/play/section" element={<Section />} />
-          <Route path="/play/result" element={<Result />} />
+          <Route path="/*" element={<Navigate to="/" />} />
         </Routes>
-      </div>
-    </BrowserRouter>
+      </Router>
+    </AuthProvider>
   );
-}
+};
+
 
 export default App;

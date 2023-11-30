@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from './AuthContext';
 import '../css/AccountForm.scss';
 
 const AccountForm = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [loginMessage, setLoginMessage] = useState('');
+  const { login } = useAuth();
 
   const navigate = useNavigate();
 
@@ -18,9 +20,9 @@ const AccountForm = () => {
   }
 
   const handleLogin = () => {
-    // Mock login logic
     if (username === 'user' && password === 'pass') {
       setLoginMessage('Login successful!');
+      login();
       navigate('/menu');
     } else {
       setLoginMessage('Login failed. Invalid username or password.');
