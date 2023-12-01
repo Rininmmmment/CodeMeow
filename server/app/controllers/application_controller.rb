@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
       user = User.find_by(user_name: params[:user_name])
       if user&.authenticate(params[:password])
         session[:user_id] = user.id
-        render json: { message: 'Login successful!' }
+        render json: { message: 'Login successful!' }, status: :authenticate
       else
         render json: { message: 'Login failed. Invalid email or password.' }, status: :unauthorized
       end

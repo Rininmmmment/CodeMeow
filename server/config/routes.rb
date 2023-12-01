@@ -20,8 +20,8 @@ Rails.application.routes.draw do
   # Quizzes
   resources :quizze, controller: 'quiz', only: [:index, :show, :create, :update, :destroy]
 
-  # Sessions
+  # Sessions（アクションを変えると爆発する）
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
-  post '/islogin', to: 'application#logged_in?'
+  get '/islogin', to: 'application#logged_in?'
 end
