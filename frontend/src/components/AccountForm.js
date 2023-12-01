@@ -18,16 +18,7 @@ const AccountForm = () => {
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
   }
-
-  // const handleLogin = () => {
-  //   if (username === 'user' && password === 'pass') {
-  //     setLoginMessage('Login successful!');
-  //     login();
-  //     navigate('/menu');
-  //   } else {
-  //     setLoginMessage('Login failed. Invalid username or password.');
-  //   }
-  // }
+  
   const handleLogin = async () => {
     try {
       const response = await fetch('http://localhost:8000/login', {

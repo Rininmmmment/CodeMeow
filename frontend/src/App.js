@@ -20,22 +20,8 @@ const App = () => {
     <AuthProvider>
       <Router>
         <Routes>
-          <Route
-            path="/menu"
-            element={
-              <PrivateRoute>
-                <Menu />
-              </PrivateRoute>
-            }
-          />
-          <Route
-            path="/make-quizzes/upload"
-            element={
-              <PrivateRoute>
-                <Make />
-              </PrivateRoute>
-            }
-          />
+          <Route path="/menu" element={<Menu />} />
+          <Route path="/make-quizzes/upload" element={<Make />} />
           <Route path="/login" element={<Login />} />
           <Route path="/*" element={<Navigate to="/" />} />
         </Routes>
