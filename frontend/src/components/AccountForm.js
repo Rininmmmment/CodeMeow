@@ -19,15 +19,45 @@ const AccountForm = () => {
     setPassword(e.target.value);
   }
 
-  const handleLogin = () => {
-    if (username === 'user' && password === 'pass') {
-      setLoginMessage('Login successful!');
-      login();
-      navigate('/menu');
-    } else {
-      setLoginMessage('Login failed. Invalid username or password.');
+  // const handleLogin = () => {
+  //   if (username === 'user' && password === 'pass') {
+  //     setLoginMessage('Login successful!');
+  //     login();
+  //     navigate('/menu');
+  //   } else {
+  //     setLoginMessage('Login failed. Invalid username or password.');
+  //   }
+  // }
+  const handleLogin = async () => {
+    try {
+      const response = await fetch('http://localhost:8000/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          user_name: username,
+          password: password,
+        }),
+      });
+  
+      if (response.ok) {
+        // ログイン成功の場合
+        const data = await response.json();
+        setLoginMessage(data.message);
+        login();
+        navigate('/menu');
+      } else {
+        // ログイン失敗の場合
+        const data = await response.json();
+        setLoginMessage(`Login failed. ${data.message}`);
+      }
+    } catch (error) {
+      console.error('Login error:', error);
+      setLoginMessage('An error occurred during login.');
     }
-  }
+  };
+  
 
   return (
     <div className="login-form">
