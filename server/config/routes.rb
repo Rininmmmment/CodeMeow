@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  post 'read-file', to: 'files#upload'
   # - GET /users： ユーザー一覧を取得
   # - GET /users/:id：特定のユーザーの詳細を取得
   # - POST /users：ユーザーを作成
