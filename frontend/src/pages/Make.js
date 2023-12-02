@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import '../css/Make.scss';
+import Navbar from '../components/Navbar.js';
 
 const Make = () => {
   const [chapterName, setChapterName] = useState('');
@@ -23,32 +25,36 @@ const Make = () => {
   };
 
   return (
-    <div>
-      <label>
-        Chapter Name:
-        <input
-          type="text"
-          value={chapterName}
-          onChange={handleChapterNameChange}
-        />
-      </label>
-      <br />
-      <label>
-        File Upload (.py, .cpp, etc.):
-        <input
-          type="file"
-          accept=".py,.cpp,text/plain"
-          onChange={handleFileUpload}
-          multiple
-        />
-      </label>
-      <br />
-      {isFilesUploaded && (
-        <button type="button" onClick={handleButtonClick}>
-          MAKE QUIZZES
-        </button>
-      )}
-      <br />
+    <div className='make-container'>
+      <Navbar />
+      <div className='form-container'>
+        <label className='chapter-name'>
+          <span className='btn-title'>Chapter Name:<br /></span>
+          <input
+            type="text"
+            value={chapterName}
+            onChange={handleChapterNameChange}
+          />
+        </label>
+        <br />
+        <label className='file-upload'>
+          <span className='btn-title'>File Upload (.py, .cpp):<br /></span>
+          <span className='btn-comment'>You can upload files at once if they are from the same chapter.</span>
+          <input
+            type="file"
+            accept=".py,.cpp"
+            onChange={handleFileUpload}
+            multiple
+          />
+        </label>
+        <br />
+        {isFilesUploaded && (
+          <button className='make-btn' type="button" onClick={handleButtonClick}>
+            MAKE QUIZZES
+          </button>
+        )}
+        <br />
+      </div>
     </div>
   );
 };
