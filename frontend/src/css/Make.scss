@@ -6,6 +6,7 @@
     @include default-background;
     height: 100vh;
     text-align: center;
+    overflow: scroll;
 
     .form-container {
         padding: 120px 100px;
@@ -35,6 +36,11 @@
                 border-bottom: 5px solid #000;
                 padding: 3px;
                 outline: none;
+            }
+            .server-response {
+                width: 80%;
+                margin: auto;
+                text-align: left;
             }
         }
         label.file-upload {

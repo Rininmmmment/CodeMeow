@@ -6,22 +6,42 @@ const Make = () => {
   const [chapterName, setChapterName] = useState('');
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [isFilesUploaded, setFilesUploaded] = useState(false);
+  const [serverResponse, setServerResponse] = useState(null);
 
   const handleChapterNameChange = (e) => {
     setChapterName(e.target.value);
   };
 
   const handleFileUpload = (e) => {
-    const files = Array.from(e.target.files);
-    setSelectedFiles(files);
+    const selectedFiles = Array.from(e.target.files);
+    setSelectedFiles(selectedFiles);
     setFilesUploaded(true);
-    // ファイルをアップロードするための処理を実装
-    console.log('Files uploaded:', files);
+
+    if (selectedFiles.length > 0) {
+      const formData = new FormData();
+      selectedFiles.forEach((file, index) => {
+        formData.append(`file`, file);
+      });
+
+      fetch('http://localhost:8000/read-file', {
+        method: 'POST',
+        body: formData,
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          setServerResponse(data); // レスポンスをステートにセット
+          console.log('Server response:', data);
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
+    } else {
+      console.warn('No file selected.');
+    }
   };
 
   const handleButtonClick = () => {
-    // ボタンがクリックされたときの処理をここに追加
-    console.log('Button clicked!');
+
   };
 
   return (
@@ -35,6 +55,12 @@ const Make = () => {
             value={chapterName}
             onChange={handleChapterNameChange}
           />
+          {/* サーバーからの応答を表示 */}
+          {serverResponse && (
+            <div className='server-response'>
+              <pre>{JSON.stringify(serverResponse, null, 2)}</pre>
+            </div>
+          )}
         </label>
         <br />
         <label className='file-upload'>
