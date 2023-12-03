@@ -41,7 +41,19 @@ const Make = () => {
   };
 
   const handleButtonClick = () => {
-
+    // quiz情報を整形し、user_idを取得し、forでpostする
+    fetch('http://localhost:8000/read-file', {
+        method: 'POST',
+        body: JSON.stringify({
+          question: sq,
+          answer: sq_ans,
+          chapter_id: chapter_id,
+          section_id: section_id,
+          result: 0,
+          user_id: user_id,
+          text: mq,
+        }),
+      })
   };
 
   return (
@@ -49,7 +61,7 @@ const Make = () => {
       <Navbar />
       <div className='form-container'>
         <label className='chapter-name'>
-          <span className='btn-title'>Chapter Name:<br /></span>
+          <span className='btn-title'>Chapter Name<br /></span>
           <input
             type="text"
             value={chapterName}
@@ -64,7 +76,7 @@ const Make = () => {
         </label>
         <br />
         <label className='file-upload'>
-          <span className='btn-title'>File Upload (.py, .cpp):<br /></span>
+          <span className='btn-title'>File Upload (.py, .cpp)<br /></span>
           <span className='btn-comment'>You can upload files at once if they are from the same chapter.</span>
           <input
             type="file"
