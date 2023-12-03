@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   resources :results, controller: 'result', only: [:index, :show, :create, :update, :destroy]
 
   # Quizzes
-  resources :quizze, controller: 'quiz', only: [:index, :show, :create, :update, :destroy]
+  resources :quizzes, controller: 'quiz', only: [:index, :show, :create, :update, :destroy]
 
   # Sessions（アクションを変えると爆発する）
   post '/login', to: 'application#create'
