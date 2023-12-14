@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  match '*path' => 'options_request#response_preflight_request', via: :options
+  post 'read-file', to: 'files#upload'
   # - GET /users： ユーザー一覧を取得
   # - GET /users/:id：特定のユーザーの詳細を取得
   # - POST /users：ユーザーを作成
@@ -18,10 +20,10 @@ Rails.application.routes.draw do
   resources :results, controller: 'result', only: [:index, :show, :create, :update, :destroy]
 
   # Quizzes
-  resources :quizze, controller: 'quiz', only: [:index, :show, :create, :update, :destroy]
+  resources :quizzes, controller: 'quiz', only: [:index, :show, :create, :update, :destroy]
 
   # Sessions（アクションを変えると爆発する）
-  post '/login', to: 'sessions#create'
-  delete '/logout', to: 'sessions#destroy'
-  get '/islogin', to: 'application#logged_in?'
+  post '/login', to: 'application#create'
+  delete '/logout', to: 'application#destroy'
+  get '/islogin', to: 'application#is_login'
 end

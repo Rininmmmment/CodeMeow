@@ -4,10 +4,10 @@ import { AuthProvider, useAuth } from './components/AuthContext';
 import Login from './pages/Login';
 import Menu from './pages/Menu';
 import Make from './pages/Make';
-import Select from './pages/Select';
-import Chapter from './pages/Chapter';
-import Section from './pages/Section';
-import Result from './pages/Result';
+// import Select from './pages/Select';
+// import Chapter from './pages/Chapter';
+// import Section from './pages/Section';
+// import Result from './pages/Result';
 
 const PrivateRoute = ({ children }) => {
   const { isLoggedIn } = useAuth();
@@ -20,16 +20,15 @@ const App = () => {
     <AuthProvider>
       <Router>
         <Routes>
-          <Route
-            path="/menu"
+          {/* これはエラーになる: <Route path="/menu" element={<PrivateRoute element={<Menu />} />} /> */}
+          <Route path="/menu"
             element={
               <PrivateRoute>
                 <Menu />
               </PrivateRoute>
             }
           />
-          <Route
-            path="/make-quizzes/upload"
+          <Route path="/make/upload"
             element={
               <PrivateRoute>
                 <Make />
