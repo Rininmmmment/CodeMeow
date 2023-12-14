@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  match '*path' => 'options_request#response_preflight_request', via: :options
   post 'read-file', to: 'files#upload'
   # - GET /users： ユーザー一覧を取得
   # - GET /users/:id：特定のユーザーの詳細を取得
@@ -24,5 +25,5 @@ Rails.application.routes.draw do
   # Sessions（アクションを変えると爆発する）
   post '/login', to: 'application#create'
   delete '/logout', to: 'application#destroy'
-  get '/islogin', to: 'application#logged_in?'
+  get '/islogin', to: 'application#is_login'
 end

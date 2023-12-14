@@ -3,6 +3,9 @@ class FilesController < ApplicationController
     uploaded_file = params[:file]
 
     if uploaded_file
+      # ファイル名をセクション名にする
+      section_name = uploaded_file.original_filename
+
       lines = []
       mq = '' # 大問
       sq = '' # 小問
@@ -44,7 +47,7 @@ class FilesController < ApplicationController
           lines << cleaned_line.chomp
         end
       end
-      render json: { text: mq, sq_list: sq_list }
+      render json: { section_name: section_name, text: mq, sq_list: sq_list }
 
     else
       render json: { error: 'No file uploaded' }, status: :unprocessable_entity

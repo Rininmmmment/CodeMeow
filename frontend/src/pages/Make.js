@@ -4,9 +4,13 @@ import Navbar from '../components/Navbar.js';
 
 const Make = () => {
   const [chapterName, setChapterName] = useState('');
+  const [chapterId, setChapterId] = useState('');
+  const [sectionId, setSectionId] = useState('');
+  // const [userId, setUserId] = useState('');
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [isFilesUploaded, setFilesUploaded] = useState(false);
   const [serverResponse, setServerResponse] = useState(null);
+  const [isLoggedIn, setLoggedIn] = useState(false);
 
   const handleChapterNameChange = (e) => {
     setChapterName(e.target.value);
@@ -39,21 +43,71 @@ const Make = () => {
       console.warn('No file selected.');
     }
   };
-
+  
   const handleButtonClick = () => {
-    // quiz情報を整形し、user_idを取得し、forでpostする
-    fetch('http://localhost:8000/read-file', {
-        method: 'POST',
-        body: JSON.stringify({
-          question: sq,
-          answer: sq_ans,
-          chapter_id: chapter_id,
-          section_id: section_id,
-          result: 0,
-          user_id: user_id,
-          text: mq,
-        }),
+    // // chapter_nameを登録
+    fetch('http://localhost:8000/chapters', {
+      method: 'POST',
+      body: JSON.stringify({
+        chapter_name: chapterName,
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
       })
+      .then(data => {
+        setChapterId(data.id);
+      })
+      .catch(error => {
+        console.error('Error during POST:', error);
+      });
+    
+    // // section_nameを登録
+    fetch('http://localhost:8000/sections', {
+      method: 'POST',
+      body: JSON.stringify({
+        section_name: serverResponse.section_name,
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then(data => {
+        setSectionId(data.id);
+      })
+      .catch(error => {
+        console.error('Error during POST:', error);
+      });
+
+    // クイズを登録
+    const sqList = serverResponse.sq_list;
+
+    sqList.forEach(function (sq) {
+      const formData = new FormData();
+      formData.append('question', sq[0]);
+      formData.append('answer', sq[1]);
+      formData.append('chapter_id', chapterId);
+      formData.append('section_id', sectionId);
+      formData.append('result', '0');
+      formData.append('text', serverResponse.text);
+
+      fetch('http://localhost:8000/quizzes', {
+        method: 'POST',
+        body: formData,
+      })
+    });
   };
 
   return (

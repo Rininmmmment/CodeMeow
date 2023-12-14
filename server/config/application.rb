@@ -10,10 +10,13 @@ module Myapp
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
-    config.api_only = true
+    config.api_only = false
     config.session_store :cookie_store, key: '_code_meow_session'
+    # config/initializers/session_store.rb
+
+    # Rails.application.config.session_store :cookie_store, key: '_code_meow_session', expire_after: 1.hour
+    config.middleware.use ActionDispatch::Session::CookieStore
     config.middleware.use ActionDispatch::Cookies
-    config.middleware.use config.session_store, config.session_options
 
     # Configuration for the application, engines, and railties goes here.
     #

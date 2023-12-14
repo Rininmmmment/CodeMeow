@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import AccountForm from '../components/AccountForm.js';
+import AccountForm from '../components/LoginFrom.js';
 import '../css/Login.scss';
 
 const Login = () => {
