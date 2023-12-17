@@ -1,16 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import '../css/Make.scss';
-import Navbar from '../components/Navbar.js';
+import Navbar from '../components/Navbar';
+import CodeSection from '../components/CodeSection';
+import { useAuth } from '../components/AuthContext';
 
 const Make = () => {
+  const { userInfo } = useAuth();
+
   const [chapterName, setChapterName] = useState('');
+  const [sectionName, setSectionName] = useState('');
+  const [text, setText] = useState('');
+  const [sqList, setSqList] = useState([[]]);
+  const [userId, setUserId] = useState(userInfo);
+
   const [chapterId, setChapterId] = useState('');
   const [sectionId, setSectionId] = useState('');
-  // const [userId, setUserId] = useState('');
+
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [isFilesUploaded, setFilesUploaded] = useState(false);
   const [serverResponse, setServerResponse] = useState(null);
-  const [isLoggedIn, setLoggedIn] = useState(false);
 
   const handleChapterNameChange = (e) => {
     setChapterName(e.target.value);
@@ -33,8 +41,10 @@ const Make = () => {
       })
         .then((response) => response.json())
         .then((data) => {
-          setServerResponse(data); // レスポンスをステートにセット
-          console.log('Server response:', data);
+          setServerResponse(data);
+          setSectionName(data.section_name);
+          setText(data.text);
+          setSqList(data.sq_list);
         })
         .catch((error) => {
           console.error('Error:', error);
@@ -72,7 +82,7 @@ const Make = () => {
     fetch('http://localhost:8000/sections', {
       method: 'POST',
       body: JSON.stringify({
-        section_name: serverResponse.section_name,
+        section_name: sectionName,
       }),
       headers: {
         'Content-Type': 'application/json',
@@ -92,8 +102,6 @@ const Make = () => {
       });
 
     // クイズを登録
-    const sqList = serverResponse.sq_list;
-
     sqList.forEach(function (sq) {
       const formData = new FormData();
       formData.append('question', sq[0]);
@@ -101,7 +109,8 @@ const Make = () => {
       formData.append('chapter_id', chapterId);
       formData.append('section_id', sectionId);
       formData.append('result', '0');
-      formData.append('text', serverResponse.text);
+      formData.append('user_id', userId);
+      formData.append('text', text);
 
       fetch('http://localhost:8000/quizzes', {
         method: 'POST',
@@ -124,7 +133,11 @@ const Make = () => {
           {/* サーバーからの応答を表示 */}
           {serverResponse && (
             <div className='server-response'>
-              <pre>{JSON.stringify(serverResponse, null, 2)}</pre>
+              <CodeSection
+                chapterName={chapterName}
+                sectionName={sectionName}
+                sqList={sqList}
+              />
             </div>
           )}
         </label>

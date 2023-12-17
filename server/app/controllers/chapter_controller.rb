@@ -1,6 +1,5 @@
 class ChapterController < ApplicationController
   skip_before_action :verify_authenticity_token
-  before_action :is_login
   before_action :set_chapter, only: [:show, :update, :destroy]
 
   def index
