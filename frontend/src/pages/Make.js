@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import '../css/Make.scss';
 import Navbar from '../components/Navbar';
-import ChapterView from '../components/ChapterView';
+import CodePreview from '../components/CodePreview';
 import { useAuth } from '../components/AuthContext';
 
 const Make = () => {
@@ -47,6 +47,8 @@ const Make = () => {
           setSectionName(data.section_name);
           setText(data.text);
           setSqList(data.sq_list);
+          console.log(data.chapterName);
+          console.log(data.sq_list);
         })
         .catch((error) => {
           console.error('Error:', error);
@@ -143,7 +145,7 @@ const Make = () => {
           {/* サーバーからの応答を表示 */}
           {serverResponse && (
             <div className='server-response'>
-              <ChapterView
+              <CodePreview
                 chapterName={chapterName}
                 sectionName={sectionName}
                 sqList={sqList}
@@ -154,7 +156,7 @@ const Make = () => {
         <br />
         <label className='file-upload'>
           <span className='btn-title'>File Upload (.py, .cpp)<br /></span>
-          <span className='btn-comment'>You can upload files at once if they are from the same chapter.</span>
+          {/* <span className='btn-comment'>You can upload files at once if they are from the same chapter.</span> */}
           <input
             type="file"
             accept=".py,.cpp"
