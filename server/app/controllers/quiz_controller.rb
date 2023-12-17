@@ -1,6 +1,5 @@
 class QuizController < ApplicationController
   skip_before_action :verify_authenticity_token
-  before_action :is_login
   before_action :set_quiz, only: [:show, :update, :destroy]
 
   def index
@@ -43,6 +42,6 @@ class QuizController < ApplicationController
 
   def quiz_params
     # params.require(:quiz).permit(:quiz_name, :email, :password)
-    params.permit(:question, :answer, :chapter_id, :section_id, :result, :user_id, :text).merge(user_id: @current_user.id)
+    params.permit(:question, :answer, :chapter_id, :section_id, :result, :user_id, :text)
   end
 end
