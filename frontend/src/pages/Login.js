@@ -6,7 +6,7 @@ const Login = () => {
   return (
     <div class="login-container">
       <div class="logo-container">
-        <img src="../img/logo_big.png" />
+        <img src="../images/logo_big.png" />
       </div>
       <div class="form-container">
         <AccountForm />

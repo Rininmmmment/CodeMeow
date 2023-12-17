@@ -4,16 +4,14 @@ import Navbar from '../components/Navbar.js';
 
 const Menu = () => {
   return (
-    <div>
+    <div className="menu-container">
       <Navbar />
-      <div className="menu-container">
-        <div className="centering-container">
-          <div className="make-play-container">
-            <a href="/make/upload" className="menu-btn make">MAKE AND EDIT<br />QUIZ</a>
-            <a href="/code-list" className="menu-btn play">PLAY CODE</a>
-          </div>
-          <a href="#" className="menu-btn settings">SETTINGS</a>
+      <div className="centering-container">
+        <div className="make-play-container">
+          <a href="/make/upload" className="menu-btn make">MAKE QUIZZES</a>
+          <a href="/code-list" className="menu-btn play">PLAY CODE</a>
         </div>
+        <a href="#" className="menu-btn settings">SETTINGS</a>
       </div>
     </div>
   );

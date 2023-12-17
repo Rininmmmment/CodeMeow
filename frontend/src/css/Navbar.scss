@@ -7,15 +7,34 @@ nav{
     background: #17152C;
     margin: 0;
     padding: 0;
-    position: absolute;
+    position: absolute!important;
+    top: 0;
     z-index: 999;
+    position: relative;
 
     a.logo{
         margin: 0 auto;
+        img{
+            width: 280px;
+            margin: 0 auto;
+        }
     }
 
-    img.logo{
-        width: 280px;
-        margin: 0 auto;
+    a.user{
+        background: rgba(255, 255, 255, 0.1);
+        position: absolute;
+        color: #fff;
+        text-decoration: none;
+        font-weight: 700;
+        top: 0px; // 適切な位置を指定
+        right: 50px;
+        width: 100px;
+        display: inline-block;
+        text-align: center;
+        line-height: 70px;
+        transition: 0.5s;
+        &:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
     }
 }

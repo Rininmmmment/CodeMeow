@@ -5,8 +5,8 @@ import '../css/Navbar.scss';
 const Navbar = () => {
   return (
     <nav>
-      <a href="/menu" className="logo"><img src="images/logo_small.png" className="logo" /></a>
-      {/* <a href="#"><img src="img/user.png" className="user" /></a> */}
+      <a href="/menu" className="logo"><img src={process.env.PUBLIC_URL + '/images/logo_small.png'} className="logo" /></a>
+      <a href="#" className='user'>Log out</a>
     </nav>
   );
 };
