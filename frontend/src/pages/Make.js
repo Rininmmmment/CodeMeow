@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import '../css/Make.scss';
 import Navbar from '../components/Navbar';
-import CodeSection from '../components/CodeSection';
+import ChapterView from '../components/ChapterView';
 import { useAuth } from '../components/AuthContext';
 
 const Make = () => {
@@ -143,7 +143,7 @@ const Make = () => {
           {/* サーバーからの応答を表示 */}
           {serverResponse && (
             <div className='server-response'>
-              <CodeSection
+              <ChapterView
                 chapterName={chapterName}
                 sectionName={sectionName}
                 sqList={sqList}
