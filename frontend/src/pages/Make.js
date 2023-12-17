@@ -19,6 +19,8 @@ const Make = () => {
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [isFilesUploaded, setFilesUploaded] = useState(false);
   const [serverResponse, setServerResponse] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [registrationCompleted, setRegistrationCompleted] = useState(false);
 
   const handleChapterNameChange = (e) => {
     setChapterName(e.target.value);
@@ -54,70 +56,78 @@ const Make = () => {
     }
   };
   
-  const handleButtonClick = () => {
-    // // chapter_nameを登録
-    fetch('http://localhost:8000/chapters', {
-      method: 'POST',
-      body: JSON.stringify({
-        chapter_name: chapterName,
-      }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then(response => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        return response.json();
-      })
-      .then(data => {
-        setChapterId(data.id);
-      })
-      .catch(error => {
-        console.error('Error during POST:', error);
-      });
-    
-    // // section_nameを登録
-    fetch('http://localhost:8000/sections', {
-      method: 'POST',
-      body: JSON.stringify({
-        section_name: sectionName,
-      }),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then(response => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        return response.json();
-      })
-      .then(data => {
-        setSectionId(data.id);
-      })
-      .catch(error => {
-        console.error('Error during POST:', error);
-      });
+  const handleButtonClick = async () => {
+    try {
+      setLoading(true);
 
-    // クイズを登録
-    sqList.forEach(function (sq) {
-      const formData = new FormData();
-      formData.append('question', sq[0]);
-      formData.append('answer', sq[1]);
-      formData.append('chapter_id', chapterId);
-      formData.append('section_id', sectionId);
-      formData.append('result', '0');
-      formData.append('user_id', userId);
-      formData.append('text', text);
-
-      fetch('http://localhost:8000/quizzes', {
+      // chapter_nameを登録
+      const chapterResponse = await fetch('http://localhost:8000/chapters', {
         method: 'POST',
-        body: formData,
-      })
-    });
+        body: JSON.stringify({
+          chapter_name: chapterName,
+        }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      if (!chapterResponse.ok) {
+        throw new Error(`HTTP error! Status: ${chapterResponse.status}`);
+      }
+      const chapterData = await chapterResponse.json();
+      setChapterId(chapterData.id);
+
+      // section_nameを登録
+      const sectionResponse = await fetch('http://localhost:8000/sections', {
+        method: 'POST',
+        body: JSON.stringify({
+          section_name: sectionName,
+        }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      if (!sectionResponse.ok) {
+        throw new Error(`HTTP error! Status: ${sectionResponse.status}`);
+      }
+      const sectionData = await sectionResponse.json();
+      setSectionId(sectionData.id);
+
+      // クイズを登録
+      const quizRequests = sqList.map(async (sq) => {
+        const formData = new FormData();
+        formData.append('question', sq[0]);
+        formData.append('answer', sq[1]);
+        formData.append('chapter_id', chapterId);
+        formData.append('section_id', sectionId);
+        formData.append('result', '0');
+        formData.append('user_id', userId);
+        formData.append('text', text);
+
+        const quizResponse = await fetch('http://localhost:8000/quizzes', {
+          method: 'POST',
+          body: formData,
+        });
+
+        if (!quizResponse.ok) {
+          throw new Error(`HTTP error! Status: ${quizResponse.status}`);
+        }
+      });
+
+      // すべてのクイズが完了するのを待つ
+      await Promise.all(quizRequests);
+      setRegistrationCompleted(true);
+      setTimeout(() => {
+        setRegistrationCompleted(false);
+      }, 2000);
+
+    } catch (error) {
+      console.error('Error during POST:', error);
+    } finally {
+      setLoading(false);
+    }
   };
+
+  
 
   return (
     <div className='make-container'>
@@ -155,8 +165,13 @@ const Make = () => {
         <br />
         {isFilesUploaded && (
           <button className='make-btn' type="button" onClick={handleButtonClick}>
-            MAKE QUIZZES
+            {loading ? 'Making...' : 'MAKE QUIZZES'}
           </button>
+        )}
+        {registrationCompleted && (
+          <div className='registration-completed'>
+            Registration Completed!
+          </div>
         )}
         <br />
       </div>
