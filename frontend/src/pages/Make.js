@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../css/Make.scss';
 import Navbar from '../components/Navbar';
 import CodePreview from '../components/CodePreview';
@@ -22,6 +22,12 @@ const Make = () => {
   const [loading, setLoading] = useState(false);
   const [registrationCompleted, setRegistrationCompleted] = useState(false);
 
+  // useEffect(() => {
+  //   // ページがロードされた後に実行される処理
+  //   const csrfToken = document.cookie.split('; ').find(row => row.startsWith('CSRF-TOKEN=')).split('=')[1];
+  //   // ここで csrfToken を使用して何かしらの処理を行う
+  // }, []); 
+
   const handleChapterNameChange = (e) => {
     setChapterName(e.target.value);
   };
@@ -37,22 +43,41 @@ const Make = () => {
         formData.append(`file`, file);
       });
 
-      fetch('http://localhost:8000/read-file', {
-        method: 'POST',
-        body: formData,
+      fetch('http://localhost:8000/get_csrf_token', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
       })
-        .then((response) => response.json())
-        .then((data) => {
-          setServerResponse(data);
-          setSectionName(data.section_name);
-          setText(data.text);
-          setSqList(data.sq_list);
-          console.log(data.chapterName);
-          console.log(data.sq_list);
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('ネットワーク応答が正常ではありませんでした');
+          }
+          const csrfToken = response.headers.get('x-csrf-token');
+          if (!csrfToken) {
+            throw new Error('X-CSRF-Tokenが見つかりません');
+          }
+          return fetch('http://localhost:8000/read-file', {
+            method: 'POST',
+            body: formData,
+            headers: {
+              'X-CSRF-Token': csrfToken,
+            },
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              setServerResponse(data);
+              setSectionName(data.section_name);
+              setText(data.text);
+              setSqList(data.sq_list);
+              console.log(data.chapterName);
+              console.log(data.sq_list);
+            })
+            .catch((error) => {
+              console.error('Error:', error);
+            });
         })
-        .catch((error) => {
-          console.error('Error:', error);
-        });
+
     } else {
       console.warn('No file selected.');
     }
@@ -70,6 +95,7 @@ const Make = () => {
         }),
         headers: {
           'Content-Type': 'application/json',
+          
         },
       });
       if (!chapterResponse.ok) {

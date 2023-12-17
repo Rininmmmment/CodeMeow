@@ -26,4 +26,5 @@ Rails.application.routes.draw do
   post '/login', to: 'application#create'
   delete '/logout', to: 'application#destroy'
   get '/islogin', to: 'application#is_login'
+  get '/get_csrf_token', to: 'application#set_csrf_token_header'
 end

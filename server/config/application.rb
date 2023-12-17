@@ -8,7 +8,7 @@ Bundler.require(*Rails.groups)
 
 module Myapp
   class Application < Rails::Application
-    config.action_controller.allow_forgery_protection = false
+    config.action_controller.forgery_protection_origin_check = false
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 7.0
     config.api_only = false
