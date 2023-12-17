@@ -10,7 +10,7 @@ const Menu = () => {
         <div className="centering-container">
           <div className="make-play-container">
             <a href="/make/upload" className="menu-btn make">MAKE AND EDIT<br />QUIZ</a>
-            <a href="#" className="menu-btn play">PLAY CODE</a>
+            <a href="/code-list" className="menu-btn play">PLAY CODE</a>
           </div>
           <a href="#" className="menu-btn settings">SETTINGS</a>
         </div>

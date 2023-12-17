@@ -3,9 +3,23 @@ class QuizController < ApplicationController
   before_action :set_quiz, only: [:show, :update, :destroy]
 
   def index
-    @quizzes = Quiz.all
-    render json: @quizzes
+    user_id = params[:user_id]
+    quizzes = Quiz
+      .joins(:chapter, :section)
+      .where(user_id: user_id)
+      .order('quizzes.created_at ASC')
+      .select('quizzes.*, chapters.*, sections.*')
+  
+    @formatted_quizzes = quizzes.group_by { |quiz| quiz.chapter_name }
+      .transform_values do |chapter_quizzes|
+        chapter_quizzes.group_by { |quiz| quiz.section_name }
+          .transform_values { |section_quizzes| section_quizzes.map { |quiz| quiz.attributes.slice('question', 'answer') } }
+      end
+  
+    render json: @formatted_quizzes
   end
+  
+  
 
   def show
     render json: @quiz
