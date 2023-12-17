@@ -4,10 +4,10 @@
 
 ## 使い方
 1. ログインを行うと、以下のようなメニューが表示されます。
-![メニュー画面](../menu-screen.png)
+![メニュー画面](https://github.com/Rininmmmment/CodeMeow/blob/main/doc/menu_screen.png)
 
 2. ソースコードファイルを読み込ませることで簡単にコードを保存できます。
-![作成画面](make-screen.png)
+![作成画面](https://github.com/Rininmmmment/CodeMeow/blob/main/doc/male_screen.png)
 コード保存時、以下のような内容を設定できます。
 - チャプター名
 "C++基礎文法"、"Python ML"などの大きな枠でコードを分類します。
@@ -60,4 +60,4 @@ int main(){
 ```
 
 3. 保存したコードは以下のように表示されます。
-![表示画面](play-screen.png)
+![表示画面](https://github.com/Rininmmmment/CodeMeow/blob/main/doc/play_screen.png)
