@@ -3,7 +3,6 @@ import '../css/CodeSection.scss';
 
 const CodeBlock = ({ code }) => {
   const [copied, setCopied] = useState(false);
-
   const handleCopy = (event) => {
     event.preventDefault();
     navigator.clipboard.writeText(code)
