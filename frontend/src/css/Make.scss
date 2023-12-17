@@ -60,7 +60,7 @@
         }
         button.make-btn {
             display: inline-block;
-            width: 734px;
+            width: 1034px;
             line-height: 1.4;
             border: 5px solid #000;
             font-family: "Koulen";
@@ -70,11 +70,17 @@
             padding: 12px 12px 15px 12px;
             margin: 5px;
             transition: 0.5s;
+            box-sizing: border-box;
             &:hover {
                 cursor: pointer;
                 background: brighten($pink, 15%);
                 transform: translateY(-5px);
             }
+        }
+        .registration-completed {
+            font-size: 30px;
+            color: #fff;
+            transition: 0.5s;
         }
     }
 }

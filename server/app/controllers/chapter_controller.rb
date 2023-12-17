@@ -12,12 +12,14 @@ class ChapterController < ApplicationController
   end
 
   def create
-    @chapter = Chapter.new(chapter_params)
+    # 既存のレコードを探すか、見つからなければ新しいレコードを作成する
+    @chapter = Chapter.find_or_create_by(chapter_params)
 
-    if @chapter.save
-      render json: @chapter, status: :created
+    if @chapter.persisted?
+      render json: { id: @chapter.id }
     else
-      render json: @chapter.errors, status: :unprocessable_entity
+      Rails.logger.error @chapter.errors.full_messages.join(", ")
+      render json: { errors: @chapter.errors.full_messages }, status: :unprocessable_entity
     end
   end
 

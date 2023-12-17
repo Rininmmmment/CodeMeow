@@ -4,7 +4,7 @@ import { AuthProvider, useAuth } from './components/AuthContext';
 import Login from './pages/Login';
 import Menu from './pages/Menu';
 import Make from './pages/Make';
-// import Select from './pages/Select';
+import CodeList from './pages/CodeList';
 // import Chapter from './pages/Chapter';
 // import Section from './pages/Section';
 // import Result from './pages/Result';
@@ -32,6 +32,13 @@ const App = () => {
             element={
               <PrivateRoute>
                 <Make />
+              </PrivateRoute>
+            }
+          />
+          <Route path="/code-list"
+            element={
+              <PrivateRoute>
+                <CodeList />
               </PrivateRoute>
             }
           />
