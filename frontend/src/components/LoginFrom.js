@@ -72,6 +72,7 @@ const LoginForm = () => {
         <button type="button" onClick={handleLogin}>
           Meow Meow
         </button>
+        <a className='register-link' href="/register">Register if you do not have an account.</a>
         <p>{loginMessage}</p>
       </form>
     </div>
