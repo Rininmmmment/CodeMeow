@@ -1,12 +1,19 @@
 @import './common.scss';
 
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden; /* スクロールバーを非表示にする */
+  }
+
 .make-container {
     padding: 0;
     margin: 0;
     @include default-background;
     height: 100vh;
     text-align: center;
-    overflow: scroll;
+    overflow: auto;
 
     .form-container {
         padding: 120px 100px;

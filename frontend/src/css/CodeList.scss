@@ -1,17 +1,24 @@
 @import './common.scss';
 
-.code-list-container {
-    padding: 0;
-    margin: 0;
-    @include default-background;
-    height: calc(100vh + 17px);
-    text-align: center;
-    overflow: scroll;
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden; /* スクロールバーを非表示にする */
+}
 
-    .view-container {
-        margin-top: 110px;
-        display: inline-block;
-        width: 1000px;
-        font-family: "Koulen";
-    }
+.code-list-container {
+  padding: 0;
+  margin: 0;
+  @include default-background;
+  height: 100vh;
+  text-align: center;
+  overflow: auto; /* scroll ではなく auto に変更 */
+}
+
+.view-container {
+  margin-top: 110px;
+  display: inline-block;
+  width: 1000px;
+  font-family: "Koulen";
 }
