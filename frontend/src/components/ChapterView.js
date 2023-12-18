@@ -12,8 +12,16 @@ const CodeBlock = ({ code }) => {
     setTimeout(() => setCopied(false), 1500);
   };
 
+  const handleDelete = (event) => {
+    event.preventDefault();
+    console.log("削除ボタン");
+  }
+
   return (
     <div>
+      <div className="code-toolbar">
+        <button onClick={handleDelete}>削除</button>
+      </div>
       <pre>
         <code onClick={handleCopy}>{code}</code>
       </pre>
