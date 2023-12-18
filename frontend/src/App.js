@@ -4,6 +4,7 @@ import { AuthProvider, useAuth } from './components/AuthContext';
 import Login from './pages/Login';
 import Menu from './pages/Menu';
 import Make from './pages/Make';
+import Register from './pages/Register';
 import CodeList from './pages/CodeList';
 // import Chapter from './pages/Chapter';
 // import Section from './pages/Section';
@@ -43,6 +44,7 @@ const App = () => {
             }
           />
           <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
           <Route path="/*" element={<Navigate to="/" />} />
         </Routes>
       </Router>
