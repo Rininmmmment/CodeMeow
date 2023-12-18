@@ -35,6 +35,7 @@ const CodeList = () => {
             const quizzes = data[chapter][section].map((quiz) => [
                 quiz.question,
                 quiz.answer,
+                quiz.id
             ]);
 
             return {

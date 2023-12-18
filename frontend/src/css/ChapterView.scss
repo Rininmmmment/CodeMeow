@@ -52,9 +52,41 @@
 
         
         .code-container {
+            position: relative;
             margin-bottom: 20px;
             h3 {
                 margin: 25px 0 6px;
+            }
+            .code-toolbar {
+                .delete-btn {
+                    color: #fff;
+                    display: inline-block;
+                    height: 12px;
+                    width: 12px;
+                    text-align: center;
+                    margin: 6px;
+                    font-size: 18px;
+                    border-radius: 50%;
+                    background: $pink;
+                    position: absolute;
+                    border: none;
+                    &:hover {
+                        cursor: pointer;
+                        &:after {
+                            content: 'Delete';
+                            position: absolute;
+                            top: 130%;
+                            left: 50%;
+                            transform: translateX(-50%);
+                            background: rgba(0, 0, 0, 0.8);
+                            color: #fff;
+                            padding: 4px 8px;
+                            border-radius: 4px;
+                            font-size: 14px;
+                            white-space: nowrap;
+                          }
+                    }
+                }
             }
         }
         div {

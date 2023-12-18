@@ -12,16 +12,8 @@ const CodeBlock = ({ code }) => {
     setTimeout(() => setCopied(false), 1500);
   };
 
-  const handleDelete = (event) => {
-    event.preventDefault();
-    console.log("削除ボタン");
-  }
-
   return (
     <div>
-      <div className="code-toolbar">
-        <button onClick={handleDelete}>削除</button>
-      </div>
       <pre>
         <code onClick={handleCopy}>{code}</code>
       </pre>
@@ -34,6 +26,47 @@ const ChapterView = (props) => {
   const { chapterName, sectionList } = props;
 
   const [expandedSections, setExpandedSections] = useState([]);
+
+  const handleDelete = async (quizId) => {
+    try {
+      // CSRFトークン取得
+      const csrfResponse = await fetch('http://localhost:8000/get_csrf_token', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+  
+      if (!csrfResponse.ok) {
+        throw new Error('ネットワーク応答が正常ではありませんでした');
+      }
+  
+      const csrfToken = csrfResponse.headers.get('x-csrf-token');
+      if (!csrfToken) {
+        throw new Error('X-CSRF-Tokenが見つかりません');
+      }
+  
+      // クイズ削除
+      const deleteResponse = await fetch(`http://localhost:8000/quizzes/${quizId}`, {
+        method: 'DELETE',
+        headers: {
+          'X-CSRF-Token': csrfToken,
+        },
+      });
+  
+      if (deleteResponse.ok) {
+        console.log('Quiz deleted successfully');
+  
+        // 削除成功したらページを再読み込み
+        window.location.reload();
+      } else {
+        console.error('Failed to delete quiz');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+  
 
   const toggleSection = (index) => {
     setExpandedSections((prevExpanded) => {
@@ -75,8 +108,11 @@ const ChapterView = (props) => {
           {expandedSections.includes(index) && (
             <div className='code-container'>
               {sec?.quizzes.map((sq, innerIndex) => (
-                <div key={innerIndex}>
+                <div id={sq[2]} key={innerIndex}>
                   <h3>{innerIndex + 1}: {sq[0]}</h3>
+                  <div className="code-toolbar">
+                    <button className='delete-btn' onClick={() => handleDelete(sq[2])}></button>
+                  </div>
                   <CodeBlock code={sq[1]} />
                 </div>
               ))}
