@@ -78,6 +78,7 @@ const Register = () => {
           </label>
           <br />
           <button type="submit">Register</button>
+          <a href="/login" className='login-link'>Log in if you have an account.</a>
         </form>
       ) : (
         <p className="completed-message">Registration completed! You can now log in.</p>

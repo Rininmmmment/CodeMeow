@@ -74,6 +74,13 @@
             transform: translateY(-5px);
         }
     }
+
+    .login-link {
+      font-size: 14px;
+      display: inline-block;
+      margin: 15px 5px;
+      color: #000;
+    }
   
     .completed-message {
       color: $middle-blue;
