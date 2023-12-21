@@ -8,9 +8,8 @@ RUN yarn install --no-lockfile
 RUN npm install react-router-dom
 RUN npm install sass --save-dev
 RUN npm install react-copy-to-clipboard
-
+RUN npm install react-scripts
 
 COPY . .
 
-# CMD ["yarn", "dev"]
 CMD ["npm", "start"]
