@@ -3,6 +3,7 @@ import '../css/Register.scss';
 import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
+  const apiUrl = process.env.REACT_APP_API_URL;
   const [userData, setUserData] = useState({
     user_name: '',
     email: '',
@@ -23,7 +24,7 @@ const Register = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch('http://localhost:8000/users', {
+      const response = await fetch(`${apiUrl}/users`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

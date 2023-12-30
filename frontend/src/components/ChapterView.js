@@ -23,6 +23,7 @@ const CodeBlock = ({ code }) => {
 };
 
 const ChapterView = (props) => {
+  const apiUrl = process.env.REACT_APP_API_URL;
   const { chapterName, sectionList } = props;
 
   const [expandedSections, setExpandedSections] = useState([]);
@@ -30,7 +31,7 @@ const ChapterView = (props) => {
   const handleDelete = async (quizId) => {
     try {
       // CSRFトークン取得
-      const csrfResponse = await fetch('http://localhost:8000/get_csrf_token', {
+      const csrfResponse = await fetch(`${apiUrl}/get_csrf_token`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -47,7 +48,7 @@ const ChapterView = (props) => {
       }
   
       // クイズ削除
-      const deleteResponse = await fetch(`http://localhost:8000/quizzes/${quizId}`, {
+      const deleteResponse = await fetch(`${apiUrl}/quizzes/${quizId}`, {
         method: 'DELETE',
         headers: {
           'X-CSRF-Token': csrfToken,

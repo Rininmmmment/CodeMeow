@@ -4,6 +4,8 @@ import { useAuth } from './AuthContext';
 import '../css/LoginForm.scss';
 
 const LoginForm = () => {
+  const apiUrl = process.env.REACT_APP_API_URL;
+  console.log(apiUrl);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loginMessage, setLoginMessage] = useState('');
@@ -21,7 +23,7 @@ const LoginForm = () => {
   
   const handleLogin = async () => {
     try {
-      const response = await fetch('http://127.0.0.1:8000/login', {
+      const response = await fetch(`${apiUrl}/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

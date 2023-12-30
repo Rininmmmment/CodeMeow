@@ -5,6 +5,7 @@ import ChapterView from '../components/ChapterView';
 import { useAuth } from '../components/AuthContext';
 
 const CodeList = () => {
+  const apiUrl = process.env.REACT_APP_API_URL;
   const { userInfo } = useAuth();
   const [userId, setUserId] = useState(userInfo);
   const [serverResponse, setServerResponse] = useState(null);
@@ -15,7 +16,7 @@ const CodeList = () => {
   useEffect(() => {
     const fetchQuizzes = async () => {
       try {
-        const response = await fetch(`http://localhost:8000/quizzes?user_id=${encodeURIComponent(userId)}`, {
+        const response = await fetch(`${apiUrl}/quizzes?user_id=${encodeURIComponent(userId)}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',

@@ -5,6 +5,7 @@ import CodePreview from '../components/CodePreview';
 import { useAuth } from '../components/AuthContext';
 
 const Make = () => {
+  const apiUrl = process.env.REACT_APP_API_URL;
   const { userInfo } = useAuth();
 
   const [chapterName, setChapterName] = useState('');
@@ -43,7 +44,7 @@ const Make = () => {
         formData.append(`file`, file);
       });
 
-      fetch('http://localhost:8000/get_csrf_token', {
+      fetch(`${apiUrl}/get_csrf_token`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -57,7 +58,7 @@ const Make = () => {
           if (!csrfToken) {
             throw new Error('X-CSRF-Tokenが見つかりません');
           }
-          return fetch('http://localhost:8000/read-file', {
+          return fetch(`${apiUrl}/read-file`, {
             method: 'POST',
             body: formData,
             headers: {
@@ -88,7 +89,7 @@ const Make = () => {
       setLoading(true);
 
       // chapter_nameを登録
-      const chapterResponse = await fetch('http://localhost:8000/chapters', {
+      const chapterResponse = await fetch(`${apiUrl}/chapters`, {
         method: 'POST',
         body: JSON.stringify({
           chapter_name: chapterName,
@@ -105,7 +106,7 @@ const Make = () => {
       setChapterId(chapterData.id);
 
       // section_nameを登録
-      const sectionResponse = await fetch('http://localhost:8000/sections', {
+      const sectionResponse = await fetch(`${apiUrl}/sections`, {
         method: 'POST',
         body: JSON.stringify({
           section_name: sectionName,
@@ -131,7 +132,7 @@ const Make = () => {
         formData.append('user_id', userId);
         formData.append('text', text);
 
-        const quizResponse = await fetch('http://localhost:8000/quizzes', {
+        const quizResponse = await fetch(`${apiUrl}/quizzes`, {
           method: 'POST',
           body: formData,
         });
