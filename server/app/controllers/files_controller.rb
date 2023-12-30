@@ -1,4 +1,5 @@
 class FilesController < ApplicationController
+  protect_from_forgery
   def upload
     uploaded_file = params[:file]
 
