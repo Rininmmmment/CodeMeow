@@ -19,6 +19,10 @@ const CodeBlock = ({ code }) => {
       </pre>
       {copied && <div className="copy-message">Copied!</div>}
     </div>
+    // <div>
+    //   <textarea onClick={handleCopy} value={code} />
+    //   {copied && <div className="copy-message">Copied!</div>}
+    // </div>
   );
 };
 

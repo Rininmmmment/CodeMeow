@@ -30,3 +30,11 @@ services:
     ports:
       - "3000:3000"
     stdin_open: true
+
+  nginx:
+    build: ./
+    image: dockerdemo
+    ports:
+      - 80:80
+    volumes:
+      - ./src:/usr/share/nginx/html
