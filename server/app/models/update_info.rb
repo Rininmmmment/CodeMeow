@@ -1,0 +1,2 @@
+class UpdateInfo < ApplicationRecord
+end

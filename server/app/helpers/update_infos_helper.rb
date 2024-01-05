@@ -1,0 +1,2 @@
+module UpdateInfosHelper
+end
