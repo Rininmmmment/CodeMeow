@@ -1,0 +1,64 @@
+@import './common.scss';
+
+.pr-container {
+    .top-container {
+        @include default-background;
+        .img-container {
+            padding-top: 10px;
+            padding-left: 30px;
+            .logo {
+                width: 200px;
+                align-self: flex-start; // 左上に配置
+            }
+        }
+        .text-container {
+            height: 600px;
+            padding: 10px 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center; // 上下中央揃え
+            align-items: center;
+    
+            h1 {
+                text-align: center;
+                color: #fff;
+                font-size: 60px;
+                font-family: "Koulen";
+                line-height: 1;
+                margin-bottom: 10px;
+    
+                .pink {
+                    color: $pink;
+                }
+    
+                .blue {
+                    color: $blue;
+                }
+            }
+            p {
+                color: #fff;
+                font-size: 25px;
+                margin-bottom: 80px;
+                font-family: "Roboto";
+            }
+            .start-btn {
+                display: inline-block;
+                text-decoration: none;
+                color: #fff;
+                font-family: "Koulen";
+                background: $pink;
+                border-radius: 37px;
+                padding: 10px;
+                width: 250px;
+                text-align: center;
+                font-size: 30px;
+                transition: 0.5s;
+                &:hover {
+                    background: brighten($pink, 15%);
+                    cursor: pointer;
+                    transform: translateY(-5px);
+                }
+            }
+        }
+    }
+}

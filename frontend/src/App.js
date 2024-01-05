@@ -6,9 +6,7 @@ import Menu from './pages/Menu';
 import Make from './pages/Make';
 import Register from './pages/Register';
 import CodeList from './pages/CodeList';
-// import Chapter from './pages/Chapter';
-// import Section from './pages/Section';
-// import Result from './pages/Result';
+import Promotion from './pages/Promotion';
 
 const PrivateRoute = ({ children }) => {
   const { isLoggedIn } = useAuth();
@@ -45,6 +43,7 @@ const App = () => {
           />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/" element={<Promotion />} />
           <Route path="/*" element={<Navigate to="/" />} />
         </Routes>
       </Router>
