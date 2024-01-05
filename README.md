@@ -1,7 +1,7 @@
 # Code Meow Universe!
 ## 概要
 コードの断片を使いやすい形で保存しておくためのツールです。
-http://codemeow.net:3000/register
+http://codemeow.net/register
 
 ## 使い方
 1. ログインを行うと、以下のようなメニューが表示されます。
