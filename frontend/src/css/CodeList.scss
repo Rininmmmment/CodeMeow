@@ -14,11 +14,24 @@ body, html {
   height: 100vh;
   text-align: center;
   overflow: auto; /* scroll ではなく auto に変更 */
-}
 
-.view-container {
-  margin-top: 110px;
-  display: inline-block;
-  width: 1000px;
-  font-family: "Koulen";
+  .serch-container {
+    margin-top: 82px;
+    input {
+      display: inline-block;
+      width: 500px;
+      border: 2px solid #000;
+      border-radius: 5px;
+      outline: none;
+      padding: 0px 8px;
+      margin-right: 5px;
+      font-family: "Koulen";
+    }
+  }
+  
+  .view-container {
+    display: inline-block;
+    width: 1000px;
+    font-family: "Koulen";
+  }
 }

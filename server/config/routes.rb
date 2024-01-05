@@ -22,6 +22,9 @@ Rails.application.routes.draw do
   # Quizzes
   resources :quizzes, controller: 'quiz', only: [:index, :show, :create, :update, :destroy]
 
+  # Search API
+  get '/serch/:serch_word/:user_id', to: 'quiz#serch'
+
   # Sessions（アクションを変えると爆発する）
   post '/login', to: 'application#create'
   delete '/logout', to: 'application#destroy'

@@ -3,26 +3,22 @@ import '../css/ChapterView.scss';
 
 const CodeBlock = ({ code }) => {
   const [copied, setCopied] = useState(false);
-  const handleCopy = (event) => {
-    event.preventDefault();
-    navigator.clipboard.writeText(code)
-      .then(() => setCopied(true))
-      .catch((error) => console.error('Failed to copy text: ', error));
+  // HTTPでは使えないため一旦使わない
+  // const handleCopy = (event) => {
+  //   event.preventDefault();
+  //   navigator.clipboard.writeText(code)
+  //     .then(() => setCopied(true))
+  //     .catch((error) => console.error('Failed to copy text: ', error));
 
-    setTimeout(() => setCopied(false), 1500);
-  };
+  //   setTimeout(() => setCopied(false), 1500);
+  // };
 
   return (
     <div>
       <pre>
-        <code onClick={handleCopy}>{code}</code>
+        <code>{code}</code>
       </pre>
-      {copied && <div className="copy-message">Copied!</div>}
     </div>
-    // <div>
-    //   <textarea onClick={handleCopy} value={code} />
-    //   {copied && <div className="copy-message">Copied!</div>}
-    // </div>
   );
 };
 
@@ -82,6 +78,12 @@ const ChapterView = (props) => {
         return [...prevExpanded, index];
       }
     });
+  };
+
+  const handleSearch = async () => {
+    // 検索クエリを使ってAPIにリクエストを送信し、結果を取得するロジックを実装する
+    // 例: const searchResults = await fetch(`${apiUrl}/search?q=${searchQuery}`).then(response => response.json());
+    // 取得した結果を適切に処理してコンポーネントのステートに設定する
   };
 
   useEffect(() => {

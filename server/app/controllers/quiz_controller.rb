@@ -18,6 +18,26 @@ class QuizController < ApplicationController
 
     render json: @formatted_quizzes
   end
+
+  def serch
+    serch_word = params[:serch_word]
+    user_id = params[:user_id]
+
+    quizzes = Quiz
+      .joins(:chapter, :section)
+      .where(user_id: user_id)
+      .where('chapters.chapter_name LIKE ? OR quizzes.question LIKE ? OR quizzes.answer LIKE ?', "%#{serch_word}%", "%#{serch_word}%", "%#{serch_word}%")
+      .order('quizzes.created_at ASC')
+      .select('quizzes.id, quizzes.question, quizzes.answer, chapters.chapter_name, sections.section_name')
+
+    @formatted_quizzes = quizzes.group_by { |quiz| quiz.chapter_name }
+      .transform_values do |chapter_quizzes|
+        chapter_quizzes.group_by { |quiz| quiz.section_name }
+          .transform_values { |section_quizzes| section_quizzes.map { |quiz| quiz.attributes.slice('id', 'question', 'answer') } }
+      end
+
+    render json: @formatted_quizzes
+  end
   
   
 
