@@ -17,3 +17,9 @@ $gray: #A59DB7;
   background-image: url('../img/utyu4.png');
   background-position: top right;
 }
+
+* {
+  &::-webkit-scrollbar {
+    width: 0px;
+  }
+}
