@@ -80,6 +80,12 @@ const ChapterView = (props) => {
     });
   };
 
+  const handleSearch = async () => {
+    // 検索クエリを使ってAPIにリクエストを送信し、結果を取得するロジックを実装する
+    // 例: const searchResults = await fetch(`${apiUrl}/search?q=${searchQuery}`).then(response => response.json());
+    // 取得した結果を適切に処理してコンポーネントのステートに設定する
+  };
+
   useEffect(() => {
     const applyHighlight = async () => {
       try {
