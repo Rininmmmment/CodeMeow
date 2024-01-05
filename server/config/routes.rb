@@ -25,6 +25,9 @@ Rails.application.routes.draw do
   # Search API
   get '/serch/:serch_word/:user_id', to: 'quiz#serch'
 
+  # UpdateInfo
+  resources :updates, controller: 'update_infos', only: [:index, :show, :create, :update, :destroy]
+
   # Sessions（アクションを変えると爆発する）
   post '/login', to: 'application#create'
   delete '/logout', to: 'application#destroy'
