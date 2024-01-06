@@ -7,6 +7,7 @@ const Navbar = () => {
   const { userInfo, logout } = useAuth();
   const [userId, setUserId] = useState(userInfo);
   const navigate = useNavigate();
+  const apiUrl = process.env.REACT_APP_API_URL;
 
   const handleLogout = async () => {
     logout();
@@ -16,7 +17,7 @@ const Navbar = () => {
   return (
     <nav>
       <a href="/menu" className="logo"><img src={process.env.PUBLIC_URL + '/images/logo_small.png'} className="logo" /></a>
-      <a href="" className='user' onClick={() => handleLogout(userId)}>Log out</a>
+      <a href="" className='logout' onClick={() => handleLogout(userId)}><i class="fa-solid fa-right-from-bracket"></i></a>
     </nav>
   );
 };

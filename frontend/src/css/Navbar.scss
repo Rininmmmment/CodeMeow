@@ -20,21 +20,21 @@ nav{
         }
     }
 
-    a.user{
-        background: rgba(255, 255, 255, 0.1);
+    a.logout{
+        // background: rgba(255, 255, 255, 0.1);
         position: absolute;
         color: #fff;
         text-decoration: none;
-        font-weight: 700;
-        top: 0px; // 適切な位置を指定
+        font-size: 20px;
+        top: 0px;
         right: 50px;
-        width: 100px;
+        width: 50px;
         display: inline-block;
         text-align: center;
         line-height: 70px;
         transition: 0.5s;
         &:hover {
-            background: rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.1);
         }
     }
 }
