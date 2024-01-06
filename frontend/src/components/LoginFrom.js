@@ -5,7 +5,6 @@ import '../css/LoginForm.scss';
 
 const LoginForm = () => {
   const apiUrl = process.env.REACT_APP_API_URL;
-  console.log(apiUrl);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loginMessage, setLoginMessage] = useState('');
