@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
   const apiUrl = process.env.REACT_APP_API_URL;
+  const apiKey = process.env.REACT_APP_API_KEY;
   const [userData, setUserData] = useState({
     user_name: '',
     email: '',
@@ -27,6 +28,7 @@ const Register = () => {
       const response = await fetch(`${apiUrl}/users`, {
         method: 'POST',
         headers: {
+          'Authorization': apiKey,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(userData),

@@ -5,6 +5,7 @@ import '../css/LoginForm.scss';
 
 const LoginForm = () => {
   const apiUrl = process.env.REACT_APP_API_URL;
+  const apiKey = process.env.REACT_APP_API_KEY;
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loginMessage, setLoginMessage] = useState('');
@@ -25,6 +26,7 @@ const LoginForm = () => {
       const response = await fetch(`${apiUrl}/login`, {
         method: 'POST',
         headers: {
+          'Authorization': apiKey,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
