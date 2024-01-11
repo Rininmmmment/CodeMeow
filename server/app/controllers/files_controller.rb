@@ -15,6 +15,7 @@ class FilesController < ApplicationController
 
       File.open(uploaded_file.tempfile, 'r') do |file|
         # 問題に変換する処理
+        skip_lines = false  # skip_linesの初期化を追加
         file.each_line do |line|
           # タブを半角スペース4つに、改行を<br />に変換
           cleaned_line = line.gsub("\t", '    ')
@@ -34,9 +35,14 @@ class FilesController < ApplicationController
               sq_ans = ''
               sq += cleaned_line.gsub(/\/\/\[sq\]/, '')
             end
-
+          # 'return 0;'が見つかったらそれ以降の行をスキップ
+          elsif cleaned_line =~ /return 0;/
+            skip_lines = true
           # 以下タグがついていない行の処理
           else
+            # 'return 0;'が見つかっている場合は、次の行もスキップ
+            next if skip_lines
+
             # sqに何も入っていない場合、何もしない
             if sq.length == 0
               next
