@@ -48,6 +48,9 @@ class FilesController < ApplicationController
           lines << cleaned_line.chomp
         end
       end
+      if sq.length > 0
+        sq_list << [sq, sq_ans]
+      end
       render json: { section_name: section_name, text: mq, sq_list: sq_list }
 
     else
