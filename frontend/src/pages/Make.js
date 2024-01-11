@@ -8,6 +8,7 @@ const Make = () => {
   const apiUrl = process.env.REACT_APP_API_URL;
   const { userInfo } = useAuth();
 
+  const [chapterList, setChapterList] = useState([]);
   const [chapterName, setChapterName] = useState('');
   const [sectionName, setSectionName] = useState('');
   const [text, setText] = useState('');
@@ -23,11 +24,9 @@ const Make = () => {
   const [loading, setLoading] = useState(false);
   const [registrationCompleted, setRegistrationCompleted] = useState(false);
 
-  // useEffect(() => {
-  //   // ページがロードされた後に実行される処理
-  //   const csrfToken = document.cookie.split('; ').find(row => row.startsWith('CSRF-TOKEN=')).split('=')[1];
-  //   // ここで csrfToken を使用して何かしらの処理を行う
-  // }, []); 
+  const filteredChapterNameList = chapterList.filter(chapter =>
+    chapter.includes(chapterName.toLowerCase())
+  );
 
   const handleChapterNameChange = (e) => {
     setChapterName(e.target.value);
@@ -156,7 +155,22 @@ const Make = () => {
     }
   };
 
-  
+  useEffect(() => {
+    const fetchChapters = async () => {
+      try {
+        const response = await fetch(`${apiUrl}/chapters`);
+        if (!response.ok) {
+          throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const data = await response.json();
+        setChapterList(data.chapters.map(chapter => chapter.chapter_name));
+      } catch (error) {
+        console.error('Error during fetch:', error);
+      }
+    };
+
+    fetchChapters();
+  }, [chapterList]);
 
   return (
     <div className='make-container'>
