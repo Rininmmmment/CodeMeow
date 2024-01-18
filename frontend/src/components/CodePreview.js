@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import '../css/CodePreview.scss';
+import ReactMarkdown from 'react-markdown';
 
 const CodeBlock = ({ code }) => {
   const [copied, setCopied] = useState(false);
@@ -15,8 +16,8 @@ const CodeBlock = ({ code }) => {
 
   return (
     <div>
-      <pre>
-        <code onClick={handleCopy}>{code}</code>
+      <pre className='highlight'>
+        <code className='highlight' onClick={handleCopy}>{code}</code>
       </pre>
       {copied && <div className="copy-message">Copied!</div>}
     </div>
@@ -37,16 +38,17 @@ const CodePreview = (props) => {
   return (
     <div className='code-section-container'>
       {chapterName.length === 0 ? (
-        <h1>Please enter a chapter name!</h1>
+        <p className='chapter-name'>Please enter a chapter name!</p>
       ) : (
-        <h1>{chapterName}</h1>
+        <p className='chapter-name'>{chapterName}</p>
       )}
       <div className='sq-container'>
-        <h2>{sectionName}</h2>
+        <p className='section-name'>{sectionName}</p>
         {sqList.map((sq, index) => (
           <div key={index}>
             <h3>{index + 1}: {sq[0]}</h3>
-            <CodeBlock code={sq[1]} />
+            {sq[1].length !== 0 && <div className='md-container'><ReactMarkdown>{sq[1]}</ReactMarkdown></div>}
+            <CodeBlock code={sq[2]} />
           </div>
         ))}
       </div>

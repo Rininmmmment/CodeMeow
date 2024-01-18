@@ -124,12 +124,12 @@ const Make = () => {
       const quizRequests = sqList.map(async (sq) => {
         const formData = new FormData();
         formData.append('question', sq[0]);
-        formData.append('answer', sq[1]);
+        formData.append('answer', sq[2]);
         formData.append('chapter_id', chapterId);
         formData.append('section_id', sectionId);
         formData.append('result', '0');
         formData.append('user_id', userId);
-        formData.append('text', text);
+        formData.append('text', sq[1]);
 
         const quizResponse = await fetch(`${apiUrl}/quizzes`, {
           method: 'POST',

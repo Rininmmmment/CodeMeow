@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import '../css/ChapterView.scss';
+import ReactMarkdown from 'react-markdown';
 
 const CodeBlock = ({ code }) => {
   const [copied, setCopied] = useState(false);
@@ -15,8 +16,8 @@ const CodeBlock = ({ code }) => {
 
   return (
     <div>
-      <pre>
-        <code>{code}</code>
+      <pre className='highlight'>
+        <code className='highlight'>{code}</code>
       </pre>
     </div>
   );
@@ -90,7 +91,7 @@ const ChapterView = (props) => {
     const applyHighlight = async () => {
       try {
         if (window.hljs) {
-          document.querySelectorAll('pre code').forEach((block) => {
+          document.querySelectorAll('pre.highlight code.highlight').forEach((block) => {
             window.hljs.highlightBlock(block);
           });
         }
@@ -105,13 +106,13 @@ const ChapterView = (props) => {
   return (
     <div className='code-section-container'>
       {chapterName.length === 0 ? (
-        <h1>Please enter a chapter name!</h1>
+        <p className='chapter-name'>Please enter a chapter name!</p>
       ) : (
-        <h1>{chapterName}</h1>
+        <p className='chapter-name'>{chapterName}</p>
       )}
       {sectionList.map((sec, index) => (
         <div className='sq-container' key={index}>
-          <h2 onClick={() => toggleSection(index)}>{sec.sectionName}</h2>
+          <p className='section-name' onClick={() => toggleSection(index)}>{sec.sectionName}</p>
           {expandedSections.includes(index) && (
             <div className='code-container'>
               {sec?.quizzes.map((sq, innerIndex) => (
@@ -120,7 +121,8 @@ const ChapterView = (props) => {
                   <div className="code-toolbar">
                     <button className='delete-btn' onClick={() => handleDelete(sq[2])}></button>
                   </div>
-                  <CodeBlock code={sq[1]} />
+                  {sq[1].length !== 0 && <div className='md-container'><ReactMarkdown>{sq[1]}</ReactMarkdown></div>}
+                  <CodeBlock code={sq[2]} />
                 </div>
               ))}
             </div>
