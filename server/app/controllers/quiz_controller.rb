@@ -8,12 +8,12 @@ class QuizController < ApplicationController
       .joins(:chapter, :section)
       .where(user_id: user_id)
       .order('quizzes.created_at ASC')
-      .select('quizzes.id, quizzes.question, quizzes.answer, chapters.chapter_name, sections.section_name')
+      .select('quizzes.id, quizzes.question, quizzes.answer, quizzes.text, chapters.chapter_name, sections.section_name')
   
     @formatted_quizzes = quizzes.group_by { |quiz| quiz.chapter_name }
     .transform_values do |chapter_quizzes|
       chapter_quizzes.group_by { |quiz| quiz.section_name }
-        .transform_values { |section_quizzes| section_quizzes.map { |quiz| quiz.attributes.slice('id', 'question', 'answer') } }
+        .transform_values { |section_quizzes| section_quizzes.map { |quiz| quiz.attributes.slice('id', 'question', 'text', 'answer') } }
     end
 
     render json: @formatted_quizzes

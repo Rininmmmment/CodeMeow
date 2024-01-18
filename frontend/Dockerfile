@@ -9,6 +9,8 @@ RUN npm install react-router-dom
 RUN npm install sass --save-dev
 RUN npm install react-copy-to-clipboard
 RUN npm install react-scripts
+RUN npm install react-markdown
+
 
 COPY . .
 

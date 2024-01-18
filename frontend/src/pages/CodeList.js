@@ -35,6 +35,7 @@ const CodeList = () => {
         const sections = Object.keys(data[chapter]).map((section) => {
           const quizzes = data[chapter][section].map((quiz) => [
             quiz.question,
+            quiz.text,
             quiz.answer,
             quiz.id
           ]);

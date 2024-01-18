@@ -11,7 +11,7 @@
         padding-top: 55px;
         padding-bottom: 0px;
 
-        h1 {
+        p.chapter-name {
             font-size: 24px;
             width: calc(100% + 8px);
             color: #fff;
@@ -28,7 +28,7 @@
             white-space: nowrap;
             overflow: auto;
         }
-        h2 {
+        p.section-name {
             font-size: 20px;
             width: calc(100% + 8px);
             padding: 0 20px;
@@ -60,8 +60,8 @@
                 position: relative;
                 margin-bottom: 20px;
                 h3 {
-                    margin: 15px 0 6px;
-                    font-size: 17px;
+                    margin: 40px 0 10px;
+                    font-size: 20px;
                 }
                 .code-toolbar {
                     .delete-btn {
@@ -92,6 +92,17 @@
                                 white-space: nowrap;
                             }
                         }
+                    }
+                }
+                .md-container {
+                    color: #222;
+                    font-size: smaller;
+                    background: rgba(255,255,255,0.7);
+                    padding: 20px 30px;
+                    border-radius: 5px;
+                    pre, code {
+                        color: #000;
+                        background: #ddd;
                     }
                 }
             }

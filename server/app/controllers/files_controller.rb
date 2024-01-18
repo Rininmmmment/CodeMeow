@@ -1,64 +1,74 @@
 class FilesController < ApplicationController
   protect_from_forgery
+
   def upload
     uploaded_file = params[:file]
 
     if uploaded_file
-      # ファイル名をセクション名にする
       section_name = uploaded_file.original_filename
-
       lines = []
-      mq = '' # 大問
-      sq = '' # 小問
-      sq_ans = '' # 小問の答え
-      sq_list = [] # 小問リスト
+
+      sq_list = []
+      in_sq = false
+      sq = ''
+      sq_md = ''
+      sq_ans = ''
 
       File.open(uploaded_file.tempfile, 'r') do |file|
-        # 問題に変換する処理
-        skip_lines = false  # skip_linesの初期化を追加
+        skip_lines = false
+        md_flag = false
         file.each_line do |line|
-          # タブを半角スペース4つに、改行を<br />に変換
+          if skip_lines == true
+            skip_lines = false
+            next
+          end
+
           cleaned_line = line.gsub("\t", '    ')
-          # cleaned_line = line.gsub("\n", '<br>')
 
-          # //[mq]はmqに格納
-          if cleaned_line =~ /\/\/\[mq\].*/
-            mq += cleaned_line.gsub(/\/\/\[mq\]/, '') + '\n'
-
-          # //[sq]はsqに格納し、次の[sq]タグが来るまでの行をsq_ansに追加する
-          elsif cleaned_line =~ /\/\/\[sq\].*/
+          if cleaned_line =~ /\/\/\[sq\].*/
             if sq.length == 0
-              sq += cleaned_line.gsub(/\/\/\[sq\]/, '')
+              sq += cleaned_line.gsub(/\/\/\[sq\]/, '').lstrip
             else
-              sq_list << [sq, sq_ans]
-              sq = ''
-              sq_ans = ''
-              sq += cleaned_line.gsub(/\/\/\[sq\]/, '')
+              sq_list << [sq, sq_md, sq_ans]
+              sq, sq_md, sq_ans = '', '', ''
+              sq += cleaned_line.gsub(/\/\/\[sq\]/, '').lstrip
             end
-          # 'return 0;'が見つかったらそれ以降の行をスキップ
+          elsif cleaned_line =~ /\/\*/
+            if sq.length != 0
+              md_flag = true
+            else
+              render json: { error: 'Error: [sq] tag not found before /*' }, status: :unprocessable_entity
+              return
+            end
+          elsif cleaned_line =~ /\*\//
+            if sq.length != 0
+              md_flag = false
+            else
+              render json: { error: 'Error: [sq] tag not found before */' }, status: :unprocessable_entity
+              return
+            end
           elsif cleaned_line =~ /return 0;/
             skip_lines = true
-          # 以下タグがついていない行の処理
-          else
-            # 'return 0;'が見つかっている場合は、次の行もスキップ
-            next if skip_lines
 
-            # sqに何も入っていない場合、何もしない
-            if sq.length == 0
-              next
-            # sqに入っている場合、sqのansにする
+          else
+            if sq.length != 0
+              if md_flag == true
+                sq_md += cleaned_line.lstrip
+              else
+                sq_ans += cleaned_line
+              end
             else
-              sq_ans += cleaned_line
+              next
             end
           end
-          lines << cleaned_line.chomp
         end
       end
-      if sq.length > 0
-        sq_list << [sq, sq_ans]
-      end
-      render json: { section_name: section_name, text: mq, sq_list: sq_list }
 
+      if sq.length > 0
+        sq_list << [sq, sq_md, sq_ans]
+      end
+
+      render json: { section_name: section_name, sq_list: sq_list }
     else
       render json: { error: 'No file uploaded' }, status: :unprocessable_entity
     end
