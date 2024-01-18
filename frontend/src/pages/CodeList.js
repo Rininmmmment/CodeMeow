@@ -91,6 +91,7 @@ const CodeList = () => {
           const sections = Object.keys(searchData[chapter]).map((section) => {
             const quizzes = searchData[chapter][section].map((quiz) => [
               quiz.question,
+              quiz.text,
               quiz.answer,
               quiz.id
             ]);
