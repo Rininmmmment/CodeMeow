@@ -17,7 +17,7 @@ const CodeBlock = ({ code }) => {
   return (
     <div>
       <pre className='highlight'>
-        <code className='highlight'>{code}</code>
+        <code className='highlight language-cpp'>{code}</code>
       </pre>
     </div>
   );
@@ -92,7 +92,7 @@ const ChapterView = (props) => {
       try {
         if (window.hljs) {
           document.querySelectorAll('pre.highlight code.highlight').forEach((block) => {
-            window.hljs.highlightBlock(block);
+            window.hljs.highlightBlock(block, 'cpp');
           });
         }
       } catch (error) {
