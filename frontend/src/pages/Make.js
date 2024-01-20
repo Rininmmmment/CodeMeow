@@ -196,11 +196,10 @@ const Make = () => {
         </label>
         <br />
         <label className='file-upload'>
-          <span className='btn-title'>File Upload (.py, .cpp)<br /></span>
-          {/* <span className='btn-comment'>You can upload files at once if they are from the same chapter.</span> */}
+          <span className='btn-title'>File Upload (.cpp)<br /></span>
           <input
             type="file"
-            accept=".py,.cpp"
+            accept=".cpp"
             onChange={handleFileUpload}
             multiple
           />
