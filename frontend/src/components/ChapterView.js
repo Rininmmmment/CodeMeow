@@ -103,10 +103,11 @@ const ChapterView = (props) => {
               {sec?.quizzes.map((sq, innerIndex) => (
                 <div id={sq[2]} key={innerIndex} className='each-sq'>
                   <h3>{innerIndex + 1}: {sq[0]}</h3>
+                  <div className="code-toolbar">
+                      <button className='edit-btn tool-btn' onClick={() => handleDelete(sq[2])}><i class="fa-solid fa-pen-to-square"></i></button>
+                      <button className='delete-btn tool-btn' onClick={() => handleDelete(sq[2])}><i class="fa-solid fa-trash-can"></i></button>
+                  </div>
                   <div className='code'>
-                    <div className="code-toolbar">
-                      <button className='delete-btn' onClick={() => handleDelete(sq[2])}></button>
-                    </div>
                     {sq[1].length !== 0 && <div className='md-container'><ReactMarkdown>{sq[1]}</ReactMarkdown></div>}
                     <CodeBlock code={sq[2]} />
                   </div>

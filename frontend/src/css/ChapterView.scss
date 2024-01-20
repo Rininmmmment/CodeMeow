@@ -57,7 +57,7 @@
 
             
             .code-container {
-                position: relative;
+                
                 margin-bottom: 20px;
                 .each-sq {
                     margin-bottom: 65px;
@@ -70,22 +70,22 @@
                     padding-left: 35px;
                 }
                 .code-toolbar {
-                    .delete-btn {
-                        color: #fff;
+                    position: absolute;
+                    left: 13px;
+                    // display: flex;
+                    display: none;
+                    flex-direction: column;
+                    .tool-btn {
+                        background-color: rgba(0,0,0,0);
                         display: inline-block;
-                        height: 12px;
-                        width: 12px;
+                        color: #000;
                         text-align: center;
-                        margin: 6px;
-                        font-size: 18px;
-                        border-radius: 50%;
-                        background: $pink;
-                        position: absolute;
+                        margin: 0px 6px 14px;
+                        font-size: 13px;
                         border: none;
                         &:hover {
                             cursor: pointer;
                             &:after {
-                                content: 'Delete';
                                 position: absolute;
                                 top: 130%;
                                 left: 50%;
