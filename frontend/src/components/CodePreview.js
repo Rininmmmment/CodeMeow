@@ -5,21 +5,11 @@ import ReactMarkdown from 'react-markdown';
 const CodeBlock = ({ code }) => {
   const [copied, setCopied] = useState(false);
 
-  const handleCopy = (event) => {
-    event.preventDefault();
-    navigator.clipboard.writeText(code)
-      .then(() => setCopied(true))
-      .catch((error) => console.error('Failed to copy text: ', error));
-
-    setTimeout(() => setCopied(false), 1500);
-  };
-
   return (
     <div>
       <pre className='highlight'>
-        <code className='highlight' onClick={handleCopy}>{code}</code>
+        <code className='highlight language-cpp'>{code}</code>
       </pre>
-      {copied && <div className="copy-message">Copied!</div>}
     </div>
   );
 };

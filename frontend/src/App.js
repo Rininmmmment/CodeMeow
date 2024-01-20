@@ -8,6 +8,7 @@ import Register from './pages/Register';
 import CodeList from './pages/CodeList';
 import Promotion from './pages/Promotion';
 
+
 const PrivateRoute = ({ children }) => {
   const { isLoggedIn } = useAuth();
 
