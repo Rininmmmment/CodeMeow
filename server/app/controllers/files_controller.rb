@@ -19,7 +19,6 @@ class FilesController < ApplicationController
         md_flag = false
         file.each_line do |line|
           if skip_lines == true
-            skip_lines = false
             next
           end
 
@@ -68,9 +67,33 @@ class FilesController < ApplicationController
         sq_list << [sq, sq_md, sq_ans]
       end
 
+      sq_list.each do |sq|
+        sq_ans = sq[2]
+        sq_lines = sq_ans.split("\n")
+        spaces_from_first = count_spaces_until_non_space(sq_lines[0])
+      
+        # 各行の最後に \n を追加
+        sq_lines = sq_lines.map { |line| line[spaces_from_first..-1] + "\n" }
+      
+        # sq[2] を更新
+        sq[2] = sq_lines.join
+      end
+      
+      
       render json: { section_name: section_name, sq_list: sq_list }
     else
       render json: { error: 'No file uploaded' }, status: :unprocessable_entity
     end
+  end
+
+  private
+
+  def count_spaces_until_non_space(text)
+    count = 0
+    text.each_char do |char|
+      break if char != ' '
+      count += 1
+    end
+    count
   end
 end

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import AccountForm from '../components/LoginFrom.js';
+import LoginForm from '../components/LoginFrom.js';
 import '../css/Login.scss';
 
 const Login = () => {
@@ -9,7 +9,7 @@ const Login = () => {
         <img src="../images/logo_big.png" />
       </div>
       <div class="form-container">
-        <AccountForm />
+        <LoginForm />
       </div>
     </div>
   );
