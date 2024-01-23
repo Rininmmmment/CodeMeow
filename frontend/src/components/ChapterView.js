@@ -8,6 +8,7 @@ const CodeBlock = ({ code }) => {
   return (
     <div>
       <pre className='highlight'>
+        <button className='edit-btn tool-btn code-edit'><i class="fa-solid fa-pen-to-square"></i></button>
         <code className='highlight language-cpp'>{code}</code>
       </pre>
     </div>
@@ -22,7 +23,6 @@ const ChapterView = (props) => {
 
   const handleDelete = async (quizId) => {
     try {
-      // CSRFトークン取得
       const csrfResponse = await fetch(`${apiUrl}/get_csrf_token`, {
         method: 'GET',
         headers: {
@@ -101,14 +101,13 @@ const ChapterView = (props) => {
           {expandedSections.includes(index) && (
             <div className='code-container'>
               {sec?.quizzes.map((sq, innerIndex) => (
-                <div id={sq[2]} key={innerIndex} className='each-sq'>
+                <div id={sq[3]} key={innerIndex} className='each-sq'>
                   <h3>{innerIndex + 1}: {sq[0]}</h3>
                   <div className="code-toolbar">
-                      <button className='edit-btn tool-btn' onClick={() => handleDelete(sq[2])}><i class="fa-solid fa-pen-to-square"></i></button>
-                      <button className='delete-btn tool-btn' onClick={() => handleDelete(sq[2])}><i class="fa-solid fa-trash-can"></i></button>
+                      <button className='delete-btn tool-btn' onClick={() => handleDelete(sq[3])}><i class="fa-solid fa-circle-minus"></i></button>
                   </div>
                   <div className='code'>
-                    {sq[1].length !== 0 && <div className='md-container'><ReactMarkdown>{sq[1]}</ReactMarkdown></div>}
+                    {sq[1].length !== 0 && <div className='md-container'><button className='edit-btn tool-btn md-edit' onClick={() => handleDelete(sq[2])}><i class="fa-solid fa-pen-to-square"></i></button><ReactMarkdown>{sq[1]}</ReactMarkdown></div>}
                     <CodeBlock code={sq[2]} />
                   </div>
                 </div>

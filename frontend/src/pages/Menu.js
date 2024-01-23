@@ -24,8 +24,8 @@ const Menu = () => {
       <Navbar />
       <div className="centering-container">
         <div className="make-play-container">
-          <a href="/make/upload" className="menu-btn make">MAKE QUIZZES</a>
-          <a href="/code-list" className="menu-btn play">PLAY CODE</a>
+          <a href="/make/upload" className="menu-btn make">MAKE SNIPPETS<br /><i class="fa-solid fa-file-import"></i></a>
+          <a href="/code-list" className="menu-btn play">PLAY CODE<br /><i class="fa-solid fa-laptop-code"></i></a>
         </div>
         <div className='update-infos-container'>
           <h2>Information</h2>

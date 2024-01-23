@@ -1,62 +1,30 @@
 @import './common.scss';
 
-@media screen and (min-width: 768px){
-  .login-container {
+.login-container {
+  display: flex;
+  align-items: center;
+  
+  .logo-container {
+    height: 100vh;
+    width: 30%;
+    background: $dark-blue;
     display: flex;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
     
-    .logo-container {
-      height: 100vh;
-      width: 30%;
-      background: $dark-blue;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      
-      img {
-        width: 100%;
-      }
-    }
-    
-    .form-container {
-      @include default-background;
-      height: 100vh;
-      width: 70%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
+    img {
+      width: 100%;
     }
   }
-}
-
-@media screen and (max-width: 767px) {
-  .login-container {
+  
+  .form-container {
+    @include default-background;
+    height: 100vh;
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    
-    .logo-container {
-      height: 140px;
-      width: 100%;
-      background: $dark-blue;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding-top: 20px;
-      img {
-        height: 80%;
-      }
-    }
-    
-    .form-container {
-      @include default-background;
-      height: 100vh;
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding-top: 10%;
-    }
   }
 }
