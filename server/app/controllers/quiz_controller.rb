@@ -76,6 +76,6 @@ class QuizController < ApplicationController
 
   def quiz_params
     # params.require(:quiz).permit(:quiz_name, :email, :password)
-    params.permit(:question, :answer, :chapter_id, :section_id, :result, :user_id, :text)
+    params.permit(:id, :question, :answer, :chapter_id, :section_id, :result, :user_id, :text)
   end
 end
