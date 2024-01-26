@@ -172,3 +172,84 @@
         }
     }
 }
+
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+}
+
+@media only screen and (max-width: 767px) {
+    .code-section-container {
+        padding-top: 35px;
+        width: 324px;
+        border: 2px solid #000;
+
+        p.chapter-name {
+            border: 2px solid #000;
+            font-size: 18px;
+            border-radius: 10px;
+            padding: 0 12px;
+            width: 332px;
+        }
+
+        .sq-container {
+            width: 270px;
+            border: 2px solid #000;
+            border-radius: 8px;
+            margin: 6px auto;
+            padding: 23px 15px 5px;
+
+            p.section-name {
+                border: 2px solid #000;
+                border-radius: 8px;
+                width: 305px;
+                padding: 0 10px;
+                font-size: 16px;
+            }
+
+            .each-sq {
+                font-size: 16px;
+                .delete-btn {
+                    display: none;
+                }
+                h3 {
+                    font-size: 16px;
+                    margin: 20px 0 5px;
+                }
+                div.code {
+                    padding-left: 0px;
+                    font-size: smaller!important;
+                    line-height: 1.5;
+                    .md-container {
+                        padding: 0;
+                        padding: 15px 0 0 0;
+                        h1 {
+                            font-size: 18px;
+                        }
+                        h2 {
+                            font-size: 17px;
+                        }
+                        h3 {
+                            font-size: 16px;
+                        }
+                        pre {
+                            padding: 5px 10px;
+                        }
+                        .md-edit {
+                            top: 0;
+                            right: -5px;
+                        }
+                    }
+                    div {
+                        pre {
+                            font-size: 10px;
+                            padding: 30px 10px 10px 10px;
+                        }
+                        .code-edit {
+                            top: 10px;
+                            right: 8px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
