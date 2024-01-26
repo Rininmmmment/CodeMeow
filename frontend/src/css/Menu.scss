@@ -183,9 +183,11 @@
           cursor: pointer;
           transform: translateY(-5px);
         }
+        display: none;
       }
 
       .play{
+        width: 100%;
         background: $blue;
         &:hover{
           background: brighten($blue, 15%);
