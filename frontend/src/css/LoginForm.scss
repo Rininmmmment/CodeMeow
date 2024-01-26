@@ -7,179 +7,77 @@ $blue: #5174E6;
     @return $brightenedColor;
 }
 
-@media screen and (min-width: 1024px) {
-    .login-form{
-        width: 400px;
-        padding: 20px 20px 30px;
-        background: rgba(255, 255, 255, 66%);
-        border-radius: 21px;
+.login-form{
+    width: 400px;
+    padding: 20px 20px 30px;
+    background: rgba(255, 255, 255, 66%);
+    border-radius: 21px;
 
-        h2{
-            font-weight: 300;
-            font-size: 40px;
-            text-align: center;
-        }
-
-        form{
-            margin: auto;
-            width: 250px;
-            height: 300px;
-
-            input{
-                width: 250px;
-                height: 35px;
-                border: 3px solid ;
-                border-radius: 12px;
-                margin: 5px 0 20px;
-                padding: 0 8px;
-                outline: none;
-                box-sizing: border-box;
-            }
-        
-            button{
-                width: 250px;
-                height: 50px;
-                margin-top: 30px;
-                background: $pink;
-                border: 3px solid ;
-                border-radius: 12px;
-                font-weight: 700;
-                font-size: large;
-                transition: 0.3s;
-
-                &:hover {
-                    background: brighten($pink, 15%);
-                    cursor: pointer;
-                    transform: translateY(-5px);
-                }
-            }
-
-            .register-link {
-                display: inline-block;
-                color: #000;
-                font-size: 12px;
-                width: 250px;
-                text-align: center;
-                margin-top: 10px;
-            }
-        }
+    h2{
+        font-weight: 300;
+        font-size: 40px;
+        text-align: center;
     }
-}
 
-@media screen and (min-width: 768px) and (max-width: 1023px) {
-    .login-form{
-        width: 400px;
-        padding: 20px 20px 30px;
-        background: rgba(255, 255, 255, 66%);
-        border-radius: 21px;
-
-        h2{
-            font-weight: 300;
-            font-size: 40px;
-            text-align: center;
-        }
-
-        form{
-            margin: auto;
-            width: 250px;
-            height: 300px;
-
-            input{
-                width: 250px;
-                height: 35px;
-                border: 3px solid ;
-                border-radius: 12px;
-                margin: 5px 0 20px;
-                padding: 0 8px;
-                outline: none;
-                box-sizing: border-box;
-            }
-        
-            button{
-                width: 250px;
-                height: 50px;
-                margin-top: 30px;
-                background: $pink;
-                border: 3px solid ;
-                border-radius: 12px;
-                font-weight: 700;
-                font-size: large;
-                transition: 0.3s;
-
-                &:hover {
-                    background: brighten($pink, 15%);
-                    cursor: pointer;
-                    transform: translateY(-5px);
-                }
-            }
-
-            .register-link {
-                display: inline-block;
-                color: #000;
-                font-size: 12px;
-                width: 250px;
-                text-align: center;
-                margin-top: 10px;
-            }
-        }
-    }
-}
-  
-@media screen and (max-width: 767px) {
-    .login-form{
+    form{
+        margin: auto;
         width: 250px;
-        padding: 10px 30px 30px;
-        background: rgba(255, 255, 255, 66%);
-        border-radius: 21px;
+        height: 300px;
 
-        h2{
-            font-weight: 300;
-            font-size: 30px;
-            text-align: center;
+        input{
+            width: 250px;
+            height: 35px;
+            border: 3px solid ;
+            border-radius: 12px;
+            margin: 5px 0 20px;
+            padding: 0 8px;
+            outline: none;
+            box-sizing: border-box;
+        }
+    
+        button{
+            width: 250px;
+            height: 50px;
+            margin-top: 30px;
+            background: $pink;
+            border: 3px solid ;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: large;
+            transition: 0.3s;
+
+            &:hover {
+                background: brighten($pink, 15%);
+                cursor: pointer;
+                transform: translateY(-5px);
+            }
         }
 
-        form{
-            margin: auto;
+        .register-link {
+            display: inline-block;
+            color: #000;
+            font-size: 12px;
             width: 250px;
-            height: 300px;
+            text-align: center;
+            margin-top: 10px;
+        }
+    }
+}
 
-            input{
-                width: 250px;
-                height: 35px;
-                border: 3px solid ;
-                border-radius: 12px;
-                margin: 5px 0 20px;
-                padding: 0 8px;
-                outline: none;
-                box-sizing: border-box;
-            }
-        
-            button{
-                width: 250px;
-                height: 50px;
-                margin-top: 30px;
-                background: $pink;
-                border: 3px solid ;
-                border-radius: 12px;
-                font-weight: 700;
-                font-size: large;
-                transition: 0.3s;
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+}
 
-                &:hover {
-                    background: brighten($pink, 15%);
-                    cursor: pointer;
-                    transform: translateY(-5px);
-                }
-            }
+@media only screen and (max-width: 767px) {
+    .login-form {
+        width: 280px;
+        h2 {
+            font-size: 30px;
+        }
+    }
 
-            .register-link {
-                display: inline-block;
-                color: #000;
-                font-size: 12px;
-                width: 250px;
-                text-align: center;
-                margin-top: 10px;
-            }
+    form {
+        .register-link {
+            padding: 10px 0;
         }
     }
 }
